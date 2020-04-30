@@ -13,7 +13,7 @@ router.use(authMiddleware)
 router.post('/create', upload.single('thumbnail'), async (request, response) => {
     const {location: url= '' } = request.file;
     const { name, breed, size, genre, dateOfBirth, color, species} = request.body;
-    const { user_id } = request.headers;
+    const  user_id  = request.userId;
     
     try{
         const user = await User.findById(user_id)
@@ -34,7 +34,6 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
         })
     
         await pet.populate('user').execPopulate();
-        console.log(pet)
         return response.json(pet)
     }catch(error){
         
@@ -78,5 +77,7 @@ router.delete('/delete/:id', async (request, response) =>{
         return response.status(400).json({error: 'Não foi possivel excluir'})
     }
 });
+
+
 
 module.exports = app => app.use('/pet', router);
