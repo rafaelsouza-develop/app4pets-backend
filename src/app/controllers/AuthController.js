@@ -47,7 +47,7 @@ router.post('/authenticate', async (req,res) => {
 
 router.post('/forgot_password', async (req, res) => {
     const { email } = req.body
-    console.log(email)
+    
 
     try {
         const user = await User.findOne({email});
@@ -70,7 +70,7 @@ router.post('/forgot_password', async (req, res) => {
         })
     mailer.sendMail({
         to: email,
-        from: 'rafaelsouza803@gmail.com',
+        from: 'contatoapp4pets@gmail.com',
         template: 'auth/forgot_password',
         context: { token },
         

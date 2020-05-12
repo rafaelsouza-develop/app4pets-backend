@@ -5,12 +5,10 @@ const path = require('path');
 const { host, port, user, pass } = require("../config/mail.json");
 
 var transport = nodemailer.createTransport({
-  host: process.env.SENDGRID_API_SMTP,
-  port: process.env.SENDGRID_API_PORT,
-  auth: {
-    user: process.env.SENDGRID_API_USER,
-    pass: process.env.SENDGRID_API_PASS
-  }
+  host,
+  port,
+  secure: true,
+  auth: {user,pass}
 });
 
 const handlebarOptions = {
