@@ -26,6 +26,19 @@ describe('USER', () => {
         expect(response.body.user._id).toHaveLength(24);
     });
 
+    it(`create a new USER já existe`, async ()=> {
+        const response = await request(app)
+        .post('/auth/register')
+        .send({
+                name: "Rafael Souza",
+                email: "rafael2@rafael.com",
+                password: "R@fael123"
+            
+        })
+        expect(response.body).toHaveProperty('error')
+        expect(response.body.error).toEqual('Usuario já existe');
+    });
+
     it(`create new session`, async () => {
         const response = await request(app)
         .post('/auth/authenticate')

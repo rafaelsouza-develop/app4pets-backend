@@ -9,19 +9,20 @@ const mailer = require('../../modules/mailer')
 
 const router = express.Router();
 
-router.post('/register', async (req, res) =>{
-    const {email} = req.body
+router.post('/register', async (request, response) =>{
+    const {email} = request.body
     try{
 
-        if (await User.findOne({email}))
-        return res.status(400).send({ error: "Usuario já existe"})
-
-        const user  = await User.create(req.body);
+        if (await User.findOne({email})){
+            return response.status(400).send({ error: "Usuario já existe"})
+        }
+            
+        const user  = await User.create(request.body);
         user.password = undefined
-        return res.send({user})
+        return response.send({user})
     
     }catch(error){
-        return res.status(400).send({ error: 'Registration failed'});
+        return response.status(400).send({ error: 'Registration failed'});
     }
         
 });
@@ -31,8 +32,10 @@ router.post('/authenticate', async (req,res) => {
 
     const user = await User.findOne({email}).select('+password');
 
-    if (!user)
+    if (!user){
         return res.status(400).send({ error: 'user not found'})
+    }
+        
 
     if(!await bcrypt.compare(password, user.password))
         return res.status(400).send({ error: 'invalid password'})
