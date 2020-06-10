@@ -12,12 +12,12 @@ const UserSchema = new mongoose.Schema({
          required: true,
          lowercase: true
     },
-    dt_nasc: {
+    birthday: {
         type: Date,
         required: true
 
     },
-    phone_number: {
+    phone: {
         type: String,
         maxlength: 11   
     },

@@ -10,6 +10,8 @@ const mailer = require('../../modules/mailer')
 const router = express.Router();
 
 router.post('/register', async (request, response) =>{
+
+    console.log(request.body)
     const {email} = request.body
     try{
 
