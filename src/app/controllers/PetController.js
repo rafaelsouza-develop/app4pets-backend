@@ -23,11 +23,9 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
         const pet = await Pet.create({
             name,
             breed,
-            size,
             thumbnail: url,
             genre,
             dateOfBirth,
-            color,
             species,
             user: user_id,
             
