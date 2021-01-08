@@ -14,7 +14,7 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
     const {location: url= '' } = request.file;
     const { name, breed, size, genre, dateOfBirth, color, species} = request.body;
     const  user_id  = request.userId;
-    
+    console.log(request.body)
     try{
         const user = await User.findById(user_id)
         if(!user)
