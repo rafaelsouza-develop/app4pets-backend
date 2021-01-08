@@ -11,7 +11,7 @@ const PetSchema = new mongoose.Schema({
     },
     size: {
         type: String,
-        require: true
+        //require: true
     },
     thumbnail: {
         type: String
@@ -31,7 +31,7 @@ const PetSchema = new mongoose.Schema({
     },
     species: {
         type: String,
-        require: true
+        //require: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
