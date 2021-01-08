@@ -36,12 +36,12 @@ router.post('/authenticate', async (req,res) => {
     const user = await User.findOne({email}).select('+password');
 
     if (!user){
-        return res.status(400).send({ error: 'user not found'})
+        return res.status(400).send({ error: 'Usuario não encontrado'})
     }
         
 
     if(!await bcrypt.compare(password, user.password)){
-        return res.status(400).send({ error: 'invalid password'})
+        return res.status(400).send({ error: 'Senha invalida'})
     }
         
 
@@ -61,7 +61,7 @@ router.post('/forgot_password', async (req, res) => {
         const user = await User.findOne({email});
 
         if(!user)
-        return res.status(400).send({ error: "User not found"})
+        return res.status(400).send({ error: "Usuario não encontrado"})
 
         const token = crypto.randomBytes(4).toString('hex');
 
@@ -88,13 +88,13 @@ router.post('/forgot_password', async (req, res) => {
         },(err) => {
          
             if(err)
-                return res.status(400).send({ error: "Cannot send forgot password mail, try again."})
+                return res.status(400).send({ error: "Não foi possivel solicitar recuperação de senha, tente novamente."})
 
                 return res.send();
             })
 
     } catch (err) {
-        return res.status(400).send({ error: "error forgot password"});
+        return res.status(400).send({ error: "Ops! Tivemos um erro ao tentar recuperar a sua senha."});
     }
 })
 
@@ -106,15 +106,15 @@ try{
     .select('+passwordResetToken passwordResetExpires');
 
    if (!user)
-     return res.status(400).send({error: 'User not found'});
+     return res.status(400).send({error: 'Usario não encontrado'});
 
     if (token  !== user.passwordResetToken) 
-      return res.status(400).send ({error: 'Token invalid'})
+      return res.status(400).send ({error: 'Token de recuperação invalido'})
 
     const now = new Date();
 
     if (now > user.passwordResetExpires)
-    return res.status(400).send({error:'Token expired, generate a new one'});
+    return res.status(400).send({error:'Token expirado, gere novamente um novo token.'});
 
     user.password = password;
 
