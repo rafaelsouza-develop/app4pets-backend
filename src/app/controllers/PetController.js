@@ -41,7 +41,7 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
 
 router.get('/index', async (request, response) => {
 
-    const {user_id} = request.headers;
+    const  user_id  = request.userId;
     try {
         const pets = await Pet.find({user: user_id});
 
