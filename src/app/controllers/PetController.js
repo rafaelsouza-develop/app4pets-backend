@@ -30,6 +30,7 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
             user: user_id,
             
         })
+        console.log(pet)
     
         await pet.populate('user').execPopulate();
         return response.json(pet)
