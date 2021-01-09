@@ -8,7 +8,7 @@ const User = require('../models/User')
 const router = express.Router();
 const upload = multer(uploadConfig);
 
-router.use(authMiddleware)
+//router.use(authMiddleware)
 
 router.post('/create', upload.single('thumbnail'), async (request, response) => {
     const {location: url= '' } = request.file;
