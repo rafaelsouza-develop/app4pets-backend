@@ -51,7 +51,7 @@ module.exports = {
             'image/png',
             'image/gif',
         ];
-
+console.log(file.mimetype)
         if(allowedMimes.includes(file.mimetype)){
             callback(null, true);
         }else{
