@@ -13,7 +13,7 @@ router.use(authMiddleware)
 router.post('/create', upload.single('thumbnail'), async (request, response) => {
     console.log(request.body)
     const {location: url= '' } = request.file;
-    const { name, breed, size, genre, dateOfBirth, color, species} = request.body;
+    const { name, breed, dateOfBirth, color} = request.body;
     const  user_id  = request.userId;
     
     try{
@@ -25,9 +25,8 @@ router.post('/create', upload.single('thumbnail'), async (request, response) => 
             name,
             breed,
             thumbnail: url,
-            genre,
             dateOfBirth,
-            species,
+            color,
             user: user_id,
             
         })
