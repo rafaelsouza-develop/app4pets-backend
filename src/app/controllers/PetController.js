@@ -1,6 +1,7 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
 const multer = require('multer');
+const admin = require('../../modules/firebase-config')
 const uploadConfig = require('../../config/upload')
 const Pet = require('../models/Pet')
 const User = require('../models/User')
@@ -76,6 +77,29 @@ router.delete('/delete/:id', async (request, response) =>{
         return response.status(400).json({error: 'Não foi possivel excluir'})
     }
 });
+
+router.post('/notification' , async (request, response) => {
+
+    const notification_options = {
+        priority: "high",
+        timeToLive: 60 * 60 * 24
+      };
+
+    const  registrationToken = req.body.registrationToken
+    const message = req.body.message
+    const options =  notification_options
+
+    admin.messaging().sendToDevice(registrationToken, message, options)
+    .then( response => {
+
+     res.status(200).send("Notification sent successfully")
+     
+    })
+    .catch( error => {
+        console.log(error);
+    });
+
+})
 
 
 
