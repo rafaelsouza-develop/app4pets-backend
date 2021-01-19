@@ -79,7 +79,7 @@ router.delete('/delete/:id', async (request, response) =>{
 });
 
 router.post('/notification' , async (request, response) => {
-    console.log(request)
+    console.log(request.body)
     const notification_options = {
         priority: "high",
         timeToLive: 60 * 60 * 24
