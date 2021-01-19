@@ -88,7 +88,7 @@ router.post('/notification' , async (request, response) => {
     const  registrationToken = request.body.registrationToken
     const message = request.body.message
     const options =  notification_options
-    admin.
+
 
     admin.sendToDevice(registrationToken, message, options)
     .then( response => {
