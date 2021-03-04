@@ -1,9 +1,9 @@
-const firebase = require('firebase-admin')
+const admin = require('firebase-admin')
 const serviceAccount = require('../config/app4pets-dev-firebase-adminsdk.json')
 
-firebase.initializeApp({
-    credential: firebase.credential.cert(serviceAccount),
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://app4pets-dev.firebaseio.com'
   })
   
-  module.exports.admin = firebase
+module.exports.admin = admin
