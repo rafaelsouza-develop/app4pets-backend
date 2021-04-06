@@ -92,18 +92,40 @@ router.post('/notification', async (request, response) => {
 
         const payload = {
             'notification': {
-              'title': message.title,
-              'body': message.body,
+                'title': message.title,
+                'body': message.body,
             }
             // NOTE: The 'data' object is inside payload, not inside notificatio
-          };
-        
+        };
+
         await admin.messaging().sendToTopic("/topics/teste_push", payload, options)
         response.status(200).send("Notification sent successfully")
     } catch (error) {
         console.log(error)
     }
 
+
+
+
+});
+
+router.post('/geolocation', async (request, response) => {
+
+    const user_id = request.userId;
+    const geolocation = request.body.geolocation
+
+    console.log(request.body)
+
+    if (!geolocation.latitude)
+        return response.status(400).send({ error: ' latitude é obrigatoria' })
+
+    if (!geolocation.longitude)
+        return response.status(400).send({ error: ' longitude é obrigatoria' })
+
+    if (!geolocation.imei)
+        return response.status(400).send({ error: ' IMEI é obrigatorio' })
+
+    response.status(200).send("Dados chegaram corretos")
 
 
 

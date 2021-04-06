@@ -37,6 +37,10 @@ const PetSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    geolocation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Geolocation'
+    }
 
 },{
     toJSON : {
