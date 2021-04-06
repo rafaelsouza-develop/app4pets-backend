@@ -112,9 +112,12 @@ router.post('/notification', async (request, response) => {
 router.post('/geolocation', async (request, response) => {
 
     const user_id = request.userId;
-    const geolocation = request.body.geolocation
+    const { geolocation, imei } = request.body
+
 
     console.log(request.body)
+    console.log(geolocation)
+    console.log(imei)
 
     if (!geolocation.latitude)
         return response.status(400).send({ error: ' latitude é obrigatoria' })
