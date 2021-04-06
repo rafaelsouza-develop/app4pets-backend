@@ -122,7 +122,7 @@ router.post('/geolocation', async (request, response) => {
     if (!geolocation.longitude)
         return response.status(400).send({ error: ' longitude é obrigatoria' })
 
-    if (!geolocation.imei)
+    if (!imei)
         return response.status(400).send({ error: ' IMEI é obrigatorio' })
 
     response.status(200).send("Dados chegaram corretos")
